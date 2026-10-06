@@ -66,3 +66,10 @@ General:
 - pom.xml, smoke tests, and the edited DateHelper.java: AI-assisted (Claude).
 - Interpretation of the baseline reports: AI-assisted analysis, to be verified
   and rewritten by me.
+
+
+
+  ## Phase 4: Combinatorial generation (quadratic)
+Tool: PICT, seed 42. Model: testdata/quadratic.pict (a: 8 values, b: 5, c: 5).
+Exhaustive: 200 | Pairwise (2-way): ___ tests | 3-way: ___ tests
+Note: with 3 parameters, 3-way == exhaustive.
