@@ -1,0 +1,4 @@
+D1: F12 aborts although roots exist (c=0) (a=1, b=2, c=0)
+D3: F11 root clamped to int range (a=1, b=0, c=-1.0E20) -> x1 = 2147483647 | x2 = -2147483648
+D4: F09 prints '+ -' for negative imaginary part (a=-1, b=2, c=-5) -> x1 = 1 + -2i | x2 = 1 - -2i
+D5: F13 wrong roots, tiny discriminant (a=1.0E-9, b=0, c=1.0E-9) -> x1 = 3.8143418722356452i | x2 = -3.8143418722356452i

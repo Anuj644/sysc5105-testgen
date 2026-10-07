@@ -123,6 +123,38 @@ Pairwise (42 tests) exposed the same defect types as 3-way (200 tests).
 results/screenshots/ (04 pict, 05 normal run, 06 strict run, 07 jacoco,
 08-09 pit, 10 hang).
 
+## Run 3: Quadratic, category-partition testing
+Date: 2026-10-06
+Test class: quadratic.CategoryPartitionTest, frames in testdata/quad_cp_frames.csv
+Frames: 17 (F01-F17), expected roots derived by hand.
+Categories: discriminant (positive, zero, negative, equals b^2, NaN), a (positive,
+negative, zero [error]), b (zero, non-zero), c (zero, non-zero), root kind.
+Modes: normal (0 failures, class time 0.411 s) and strict (4 failures = known defects).
+
+### JaCoCo (Quadratic)
+Instruction 63% (118/319 missed), branch 70% (10/34 missed), line 49% (36/73).
+solveQuadratic 100%/100%, sqrtByNewton 100%/100%, formatDouble 100%, sign 100%,
+main 0%, validateInput 0%.
+
+### PIT (Quadratic only)
+60 mutants: 38 killed (63%), 5 survived, 17 no coverage. Test strength 88% (38/43).
+Timed out: 4 (counted as killed). Survived: ConditionalsBoundary 2, Math 3.
+Survived lines: ___ (from annotated page). PIT run 19 s, 109 test executions.
+
+### Comparison with Run 2
+17 frames vs 242 generated tests: branch coverage 70% vs 61%, mutation score
+63% vs 60%, survivors 5 vs 7. Frames target specific conditions (discriminant
+exactly 0, NaN overflow, b = 0 with order check). Line coverage is identical (49%).
+
+### Defects (results/findings_catpart_run3.txt)
+___ (paste contents)
+
+### Observations
+- F15 (a=b=c=1e200) reaches the isNaN branch that the combinatorial model missed.
+- F04/F05 (discriminant exactly 0) kill the "<" vs "<=" boundary mutant.
+- The remaining uncovered lines are in main and validateInput; they need direct
+  calls and stdin-driven tests.
+
 ### Decisions pending
 - [ ] Instructor approval of DateHelper as the date case study.
 - [ ] Scope of DateHelper evaluation (whole class vs conversion-related
