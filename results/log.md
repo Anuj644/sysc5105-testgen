@@ -76,8 +76,8 @@ and strict -Dstrict=true (known defects fail the test).
   (12.96 per mutant), 3 mutants timed out (counted as killed).
 
 ### JaCoCo (Quadratic class)
-| Metric      | Baseline | Combinatorial |
-|-------------|----------|---------------|
+| Metric      | Baseline | Combinatorial        |
+|-------------|----------|--------------------- |
 | Instruction | 33%      | 62% (121/319 missed) |
 | Branch      | 23%      | 61% (13/34 missed)   |
 | Line        | 29%      | 49% (36/73 covered)  |
