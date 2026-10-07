@@ -1,0 +1,97 @@
+D1: aborts although roots exist (c=0) (a=-1, b=-5, c=0)
+D1: aborts although roots exist (c=0) (a=-1, b=0, c=0)
+D1: aborts although roots exist (c=0) (a=-1, b=1e10, c=0)
+D1: aborts although roots exist (c=0) (a=-1, b=1e154, c=0)
+D1: aborts although roots exist (c=0) (a=-1, b=3, c=0)
+D1: aborts although roots exist (c=0) (a=-2, b=-5, c=0)
+D1: aborts although roots exist (c=0) (a=-2, b=0, c=0)
+D1: aborts although roots exist (c=0) (a=-2, b=1e10, c=0)
+D1: aborts although roots exist (c=0) (a=-2, b=1e154, c=0)
+D1: aborts although roots exist (c=0) (a=-2, b=3, c=0)
+D1: aborts although roots exist (c=0) (a=0.5, b=-5, c=0)
+D1: aborts although roots exist (c=0) (a=0.5, b=0, c=0)
+D1: aborts although roots exist (c=0) (a=0.5, b=1e10, c=0)
+D1: aborts although roots exist (c=0) (a=0.5, b=1e154, c=0)
+D1: aborts although roots exist (c=0) (a=0.5, b=3, c=0)
+D1: aborts although roots exist (c=0) (a=1, b=-5, c=0)
+D1: aborts although roots exist (c=0) (a=1, b=0, c=0)
+D1: aborts although roots exist (c=0) (a=1, b=1e10, c=0)
+D1: aborts although roots exist (c=0) (a=1, b=1e154, c=0)
+D1: aborts although roots exist (c=0) (a=1, b=3, c=0)
+D1: aborts although roots exist (c=0) (a=1e-9, b=-5, c=0)
+D1: aborts although roots exist (c=0) (a=1e-9, b=0, c=0)
+D1: aborts although roots exist (c=0) (a=1e-9, b=1e10, c=0)
+D1: aborts although roots exist (c=0) (a=1e-9, b=1e154, c=0)
+D1: aborts although roots exist (c=0) (a=1e-9, b=3, c=0)
+D1: aborts although roots exist (c=0) (a=1e154, b=-5, c=0)
+D1: aborts although roots exist (c=0) (a=1e154, b=0, c=0)
+D1: aborts although roots exist (c=0) (a=1e154, b=1e10, c=0)
+D1: aborts although roots exist (c=0) (a=1e154, b=1e154, c=0)
+D1: aborts although roots exist (c=0) (a=1e154, b=3, c=0)
+D1: aborts although roots exist (c=0) (a=2, b=-5, c=0)
+D1: aborts although roots exist (c=0) (a=2, b=0, c=0)
+D1: aborts although roots exist (c=0) (a=2, b=1e10, c=0)
+D1: aborts although roots exist (c=0) (a=2, b=1e154, c=0)
+D1: aborts although roots exist (c=0) (a=2, b=3, c=0)
+D2: predicted infinite loop, 4ac overflows (a=1e154, b=-5, c=1e154)
+D2: predicted infinite loop, 4ac overflows (a=1e154, b=0, c=1e154)
+D2: predicted infinite loop, 4ac overflows (a=1e154, b=1e10, c=1e154)
+D2: predicted infinite loop, 4ac overflows (a=1e154, b=1e154, c=1e154)
+D2: predicted infinite loop, 4ac overflows (a=1e154, b=3, c=1e154)
+D3: root clamped to int range (a=-1, b=-5, c=1e154) -> x1 = -2147483648
+x2 = 2147483647
+D3: root clamped to int range (a=-1, b=0, c=1e154) -> x1 = -2147483648
+x2 = 2147483647
+D3: root clamped to int range (a=-1, b=1e10, c=1e154) -> x1 = 2147483647
+x2 = -2147483648
+D3: root clamped to int range (a=-1, b=3, c=1e154) -> x1 = 2147483647
+x2 = -2147483648
+D3: root clamped to int range (a=-2, b=-5, c=1e154) -> x1 = -2147483648
+x2 = 2147483647
+D3: root clamped to int range (a=-2, b=0, c=1e154) -> x1 = -2147483648
+x2 = 2147483647
+D3: root clamped to int range (a=-2, b=1e10, c=1e154) -> x1 = 2147483647
+x2 = -2147483648
+D3: root clamped to int range (a=-2, b=3, c=1e154) -> x1 = 2147483647
+x2 = -2147483648
+D3: root clamped to int range (a=0.5, b=-5, c=1e154) -> x1 = 5 + 2147483647i
+x2 = 5 - 2147483647i
+D3: root clamped to int range (a=0.5, b=0, c=1e154) -> x1 = 2147483647i
+x2 = -2147483647i
+D3: root clamped to int range (a=0.5, b=1e10, c=1e154) -> x1 = -2147483648 + 2147483647i
+x2 = -2147483648 - 2147483647i
+D3: root clamped to int range (a=0.5, b=3, c=1e154) -> x1 = -3 + 2147483647i
+x2 = -3 - 2147483647i
+D3: root clamped to int range (a=1, b=-5, c=1e154) -> x1 = 2.5 + 2147483647i
+x2 = 2.5 - 2147483647i
+D3: root clamped to int range (a=1, b=0, c=1e154) -> x1 = 2147483647i
+x2 = -2147483647i
+D3: root clamped to int range (a=1, b=1e10, c=1e154) -> x1 = -2147483648 + 2147483647i
+x2 = -2147483648 - 2147483647i
+D3: root clamped to int range (a=1, b=3, c=1e154) -> x1 = -1.5 + 2147483647i
+x2 = -1.5 - 2147483647i
+D3: root clamped to int range (a=1e-9, b=-5, c=1e154) -> x1 = 2147483647 + 2147483647i
+x2 = 2147483647 - 2147483647i
+D3: root clamped to int range (a=1e-9, b=0, c=1e154) -> x1 = 2147483647i
+x2 = -2147483647i
+D3: root clamped to int range (a=1e-9, b=1e10, c=1e154) -> x1 = -2147483648 + 2147483647i
+x2 = -2147483648 - 2147483647i
+D3: root clamped to int range (a=1e-9, b=3, c=-6) -> x1 = -2147483648
+x2 = 1.9999999986666666
+D3: root clamped to int range (a=1e-9, b=3, c=1e154) -> x1 = -1500000000 + 2147483647i
+x2 = -1500000000 - 2147483647i
+D3: root clamped to int range (a=2, b=-5, c=1e154) -> x1 = 1.25 + 2147483647i
+x2 = 1.25 - 2147483647i
+D3: root clamped to int range (a=2, b=0, c=1e154) -> x1 = 2147483647i
+x2 = -2147483647i
+D3: root clamped to int range (a=2, b=1e10, c=1e154) -> x1 = -2147483648 + 2147483647i
+x2 = -2147483648 - 2147483647i
+D3: root clamped to int range (a=2, b=3, c=1e154) -> x1 = -0.75 + 2147483647i
+x2 = -0.75 - 2147483647i
+D4: prints '+ -' for negative imaginary part (a=-1, b=3, c=-6) -> x1 = 1.5 + -1.9364916731037085i
+x2 = 1.5 - -1.9364916731037085i
+D4: prints '+ -' for negative imaginary part (a=-2, b=-5, c=-6) -> x1 = -1.25 + -1.1989578808281798i
+x2 = -1.25 - -1.1989578808281798i
+D4: prints '+ -' for negative imaginary part (a=-2, b=3, c=-6) -> x1 = 0.75 + -1.5612494995995996i
+x2 = 0.75 - -1.5612494995995996i
+D5: wrong roots when |discriminant| is tiny (a=1e-9, b=0, c=1e-9) -> x1 = 3.8143418722356452i | x2 = -3.8143418722356452i

@@ -52,10 +52,6 @@
             <param>quadratic.*</param>
             <param>dates.*</param>
           </targetClasses>
-          <targetTests>
-            <param>quadratic.*</param>
-            <param>dates.*</param>
-          </targetTests>
           <outputFormats><param>HTML</param></outputFormats>
         </configuration>
       </plugin>
