@@ -19,14 +19,14 @@ Tools: Java 17, Maven 3.10.0, JUnit 5.10.2, JaCoCo 0.8.12, PIT 1.16.1
 | DateHelper | 32% (30/95)     | 35      | 4      | 0        | 31          | 11%            | 100% (4/4)    |
 
 ### Execution time
-mvn test total time: ___ s   (fill in from the "Total time:" line)
+mvn test total time: not recorded for the baseline run.
 
 ### Notes
 Quadratic:
 - 29 mutants NO_COVERAGE: complex-root branch (lines 24-35), non-integer
   formatting (line 91), validateInput (lines 110-116), main (lines 128-179).
-- 9 mutants SURVIVED. Seven are likely killable and two are likely equivalent
-  (lines 66 and 71).
+- 9 mutants SURVIVED, on lines 15, 23, 39, 40, 54, 66, 70, 71, 86. Seven are
+  likely killable; lines 66 and 71 are likely equivalent mutants.
 - Killed count includes 4 TIMED_OUT mutants (PIT counts these as detected).
 - Weak oracle: SmokeTest uses contains("x1 = 2"), so line 86 survived. Exact
   string assertions are needed.
@@ -71,13 +71,13 @@ and strict -Dstrict=true (known defects fail the test).
 
 ### Results
 - Normal mode: 0 failures. Strict mode: fails on known defects (screenshot taken).
-- Execution time: mvn clean test total 8.926 s s; CombinatorialTest class 0.867 s s.
+- Execution time: mvn clean test total 8.926 s; CombinatorialTest class 0.867 s.
 - PIT run: 26 s mutation analysis (31.6 s total), 1231 test executions
   (12.96 per mutant), 3 mutants timed out (counted as killed).
 
 ### JaCoCo (Quadratic class)
 | Metric      | Baseline | Combinatorial        |
-|-------------|----------|--------------------- |
+|-------------|----------|----------------------|
 | Instruction | 33%      | 62% (121/319 missed) |
 | Branch      | 23%      | 61% (13/34 missed)   |
 | Line        | 29%      | 49% (36/73 covered)  |
@@ -87,11 +87,11 @@ All 37 missed lines are in main (29), validateInput (7) and the default
 constructor (1).
 
 ### PIT (Quadratic only; project row is diluted by dates = 0/35)
-| Line cov. | Mutants | Killed | Survived | No coverage | Mutation score | Test strength |
-|-----------|---------|--------|----------|-------------|----------------|---------------|
-| 49% (36/73) | 60    | 36     | 7        | 17          | 60%            | 84% (36/43)   |
-Survived mutants by mutator: ConditionalsBoundary 3, Math 2, NegateConditionals 2.
-Survived lines: ___ (read from the annotated Quadratic.java page).
+| Line cov.   | Mutants | Killed | Survived | No coverage | Mutation score | Test strength |
+|-------------|---------|--------|----------|-------------|----------------|---------------|
+| 49% (36/73) | 60      | 36     | 7        | 17          | 60%            | 84% (36/43)   |
+Survived (7): line 23 (boundary), 39 (math), 44 (negate), 54 (boundary and
+negate), 66 (math), 71 (boundary).
 
 ### Defects found (results/findings_combinatorial_run2.txt)
 | ID | Defect | Distinct failing inputs | Status |
@@ -104,14 +104,18 @@ Survived lines: ___ (read from the annotated Quadratic.java page).
 Pairwise (42 tests) exposed the same defect types as 3-way (200 tests).
 
 ### Observations
-- No model value gives discriminant exactly 0, so the double-root case
-  and the "<" vs "<=" mutant at line 23 are not exercised.
-- The oracle compares roots as a set, so it does not notice root order;
-  the b > 0 boundary mutant (line 54) probably survives for that reason.
-- Line 71 "<" vs "<=" is probably an equivalent mutant.
+- No model value gives discriminant exactly 0, so the double-root case is not
+  exercised: this explains the survivors at line 23 (boundary) and line 44
+  (the "print the same root twice" check).
+- Line 54 survivors (b > 0 boundary and negation) only change which root is
+  printed first and the cancellation behaviour; the oracle compares roots as a
+  set with a numeric residual, so it cannot see them.
+- Line 71 "<" vs "<=" is probably an equivalent mutant (equality of the step
+  and the threshold practically never occurs). Line 66 changes only the
+  starting guess; probably equivalent as well. Neither is proven.
 - The NaN branch (Double.isNaN(discriminant)) was not reached: it needs
   b*b and 4ac both to overflow, i.e. |values| around 1e155 or larger. The
-  model's maximum was 1e154, so add 1e200 for category-partition.
+  model's maximum was 1e154.
 - Lowercase "1e154" is rejected by validateInput ("too large or small")
   while "1.0E154" is accepted: valid e-notation is rejected.
 - validateInput and main cannot be reached through numeric inputs; they
@@ -123,6 +127,7 @@ Pairwise (42 tests) exposed the same defect types as 3-way (200 tests).
 results/screenshots/ (04 pict, 05 normal run, 06 strict run, 07 jacoco,
 08-09 pit, 10 hang).
 
+
 ## Run 3: Quadratic, category-partition testing
 Date: 2026-10-06
 Test class: quadratic.CategoryPartitionTest, frames in testdata/quad_cp_frames.csv
@@ -131,7 +136,41 @@ Categories: discriminant (positive, zero, negative, equals b^2, NaN), a (positiv
 negative, zero [error]), b (zero, non-zero), c (zero, non-zero), root kind.
 Modes: normal (0 failures, class time 0.411 s) and strict (4 failures = known defects).
 
+### JaCoCo (Quadratic)
+Instruction 63% (118/319 missed), branch 70% (10/34 missed), line 49% (36/73).
+solveQuadratic 100%/100%, sqrtByNewton 100%/100%, formatDouble 100%, sign 100%,
+main 0%, validateInput 0%.
 
+### PIT (Quadratic only)
+60 mutants: 38 killed (63%), 5 survived, 17 no coverage. Test strength 88% (38/43).
+Timed out: 4 (counted as killed). PIT run 19 s analysis (25.5 s total),
+109 test executions (1.15 per mutation).
+Survived (5): line 23 (boundary), 25 (math), 26 (math), 66 (math), 71 (boundary).
+
+### Comparison with Run 2
+17 frames vs 242 generated tests: branch coverage 70% vs 61%, mutation score
+63% vs 60%, survivors 5 vs 7. Frames target specific conditions (NaN overflow,
+b = 0, a != 1). Line coverage is identical (49%).
+
+### Defects (results/findings_catpart_run3.txt)
+D1: F12 aborts although roots exist (a=1, b=2, c=0)
+D3: F11 root clamped to int range (a=1, b=0, c=-1.0E20) -> 2147483647 / -2147483648
+D4: F09 prints '+ -' for negative imaginary part (a=-1, b=2, c=-5) -> "x1 = 1 + -2i"
+D5: F13 wrong roots, tiny discriminant (a=1.0E-9, b=0, c=1.0E-9) -> +-3.81i
+Exactly the four defect types that were predicted from the frame design.
+
+### Observations
+- F15 (a=b=c=1e200) reaches the isNaN branch that the combinatorial model missed.
+- CORRECTION: frames F04/F05 (discriminant exactly 0) did NOT kill the "<" vs
+  "<=" mutant at line 23. Cause is a flaw in my test code: the D5 exemption
+  (|discriminant| < 1e-6) also matches a discriminant of exactly 0, so the
+  mutant's wrong output was recorded as a known defect instead of failing.
+  Fix planned in the improvement round (exempt only discriminant != 0).
+- Survivors at lines 25 and 26: all complex-root frames use a = 1 or a = -1,
+  where 2*a equals 2/a, so the mutants on "2*a" cannot be detected. A complex
+  frame with |a| != 1 is needed (planned: F18 = a=2, b=4, c=10).
+- The remaining uncovered lines are in main and validateInput; they need direct
+  calls and stdin-driven tests.
 
 
 ## Run 4: Quadratic, metamorphic testing
@@ -140,7 +179,8 @@ Test class: quadratic.MetamorphicTest (seed grid 6x6x6 = 216, c != 0, a != 0)
 Relations: MR1 scale all coefficients (k = 2, 0.5, -1, 4, 1e9, 1e-9),
 MR2 negate b (roots negate), MR3 reverse coefficients (roots invert),
 MR4 (a, kb, k^2 c) (roots scale by k). Root sets compared numerically.
-Tests: 864 (216 seeds x 4 relations). Normal mode: 0 failures, 0.567 s.
+Tests: 864 (216 seeds x 4 relations). Normal mode: 0 failures, 0.539 s
+(mvn clean test total 3.480 s).
 Strict mode: 208 failures (= 216 seeds minus 8 whose discriminant is exactly 0),
 all D5 at k = 1e-9.
 
@@ -149,51 +189,84 @@ Instruction 61%, branch 64% (22/34 covered), line 48% (35/73).
 
 ### PIT (Quadratic only)
 60 mutants: 37 killed (62%), 6 survived, 17 no coverage. Test strength 86% (37/43).
-PIT analysis 9 s, 4581 test executions (48.22 per mutation).
-Survived lines: ___
+PIT analysis 9 s (13.7 s total), 4581 test executions (48.22 per mutation).
+Survived (6): line 23 (boundary), 39 (math), 54 (boundary and negate),
+66 (math), 71 (boundary).
 
-### Defects found: ___ (from findings_metamorphic_run4.txt)
+### Defects found (results/findings_metamorphic_run4.txt)
+D5: 208 entries. No other defect type was found.
 
 ### Observations
 - Oracle-free: no expected outputs stored; found D5 (silent wrong roots) only.
 - Cannot find D1-D4: seeds avoid c = 0, overflow, large roots; numeric root
   comparison ignores formatting and root order.
+- Single printed roots are duplicated before comparison, so the double-root
+  mutants (lines 23, 44) are invisible to this oracle as well.
 - Similar mutation score to category-partition at 40x the PIT test executions.
 
 
+## Run 5: Quadratic, all three techniques combined
+Date: 2026-10-13
+Command: -Dtest=CombinatorialTest,CategoryPartitionTest,MetamorphicTest
+Tests: 1123 (17 + 242 + 864), 0 failures. Class times 0.151 s, 0.172 s, 0.331 s.
+mvn clean test total 3.849 s.
+
 ### JaCoCo (Quadratic)
-Instruction 63% (118/319 missed), branch 70% (10/34 missed), line 49% (36/73).
-solveQuadratic 100%/100%, sqrtByNewton 100%/100%, formatDouble 100%, sign 100%,
-main 0%, validateInput 0%.
+Instruction 63%, branch 70%, line 53% (39/73 covered, 34 missed).
+Same branch coverage as category-partition alone: the combined suite adds
+nothing structurally; the remaining gap is main and validateInput.
 
 ### PIT (Quadratic only)
-60 mutants: 38 killed (63%), 5 survived, 17 no coverage. Test strength 88% (38/43).
-Timed out: 4 (counted as killed). Survived: ConditionalsBoundary 2, Math 3.
-Survived lines: ___ (from annotated page). PIT run 19 s, 109 test executions.
+60 mutants: 40 killed (67%), 3 survived, 17 no coverage. Test strength 93% (40/43).
+Survived (3): line 23 (boundary), 66 (math), 71 (boundary).
+PIT analysis 24 s (27.4 s total), 5340 test executions (56.21 per mutation).
 
-### Comparison with Run 2
-17 frames vs 242 generated tests: branch coverage 70% vs 61%, mutation score
-63% vs 60%, survivors 5 vs 7. Frames target specific conditions (discriminant
-exactly 0, NaN overflow, b = 0 with order check). Line coverage is identical (49%).
-
-### Defects (results/findings_catpart_run3.txt)
-___ (paste contents)
+### Technique comparison (Quadratic)
+| Technique          | Tests | Branch | Mutation | Survivors | PIT executions | Defect types |
+|--------------------|-------|--------|----------|-----------|----------------|--------------|
+| Baseline           | 1     | 23%    | 37%      | 9         | n/a            | n/a          |
+| Combinatorial      | 242   | 61%    | 60%      | 7         | 1231           | D1-D5        |
+| Category-partition | 17    | 70%    | 63%      | 5         | 109            | D1,D3,D4,D5  |
+| Metamorphic        | 864   | 64%    | 62%      | 6         | 4581           | D5           |
+| All three          | 1123  | 70%    | 67%      | 3         | 5340           | D1-D5        |
 
 ### Observations
-- F15 (a=b=c=1e200) reaches the isNaN branch that the combinatorial model missed.
-- F04/F05 (discriminant exactly 0) kill the "<" vs "<=" boundary mutant.
-- The remaining uncovered lines are in main and validateInput; they need direct
-  calls and stdin-driven tests.
+- Category-partition gives the best score per test (17 frames, best single
+  technique on branch coverage and mutation score).
+- The techniques are complementary: survivors at lines 25/26 (category-partition)
+  and 39/44/54 (combinatorial, metamorphic) are killed by the other suites, so
+  the union leaves only 23, 66 and 71.
+- Of the 3 combined survivors, line 23 is killable (needs a discriminant-0 test
+  that is not swallowed by the D5 exemption); lines 66 and 71 are probably
+  equivalent mutants.
+- Combining techniques raises the mutation score (67% vs 63%) but not branch
+  coverage; the remaining 17 no-coverage mutants and uncovered branches are
+  in main and validateInput.
+- Defect detection depends on what each technique reaches, not on how many
+  tests it runs.
 
-### Decisions pending
+
+## Planned: Run 6, improvement round (quadratic)
+1. CategoryPartitionTest: exempt from D5 only when discriminant != 0 (kills line 23).
+2. Add frame F18 (a=2, b=4, c=10, complex roots -1 +- 2i) to kill lines 25 and 26.
+3. ImprovementTest: direct validateInput tests and scripted-stdin main() tests
+   to cover the 36 missed lines in main and validateInput.
+Record before/after JaCoCo and PIT numbers for the report.
+
+
+## Decisions pending
 - [ ] Instructor approval of DateHelper as the date case study.
 - [ ] Scope of DateHelper evaluation (whole class vs conversion-related
       methods only).
 
-### AI assistance used so far (for the disclosure section)
+## AI assistance used so far (for the disclosure section)
 - Project plan and structure: AI-assisted (Claude).
 - pom.xml, smoke tests, and the edited DateHelper.java: AI-assisted (Claude).
 - PICT model values, SolverHarness.java, CombinatorialTest.java, and the D5
   handling edit: AI-assisted (Claude), reviewed by me.
+- CategoryPartitionTest.java, frame design and expected values: AI-assisted
+  (Claude), reviewed by me.
+- MetamorphicTest.java, MR design and seed grid: AI-assisted (Claude),
+  reviewed by me.
 - Interpretation of the reports and defect analysis: AI-assisted, to be
   verified and rewritten by me.
