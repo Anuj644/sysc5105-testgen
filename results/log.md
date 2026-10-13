@@ -131,7 +131,7 @@ results/screenshots/ (04 pict, 05 normal run, 06 strict run, 07 jacoco,
 ## Run 3: Quadratic, category-partition testing
 Date: 2026-10-06
 Test class: quadratic.CategoryPartitionTest, frames in testdata/quad_cp_frames.csv
-Frames: 17 (F01-F17), expected roots derived by hand.
+Frames: 17 (F01-F17), expected roots derived by hand. F18 added in Run 6.
 Categories: discriminant (positive, zero, negative, equals b^2, NaN), a (positive,
 negative, zero [error]), b (zero, non-zero), c (zero, non-zero), root kind.
 Modes: normal (0 failures, class time 0.411 s) and strict (4 failures = known defects).
@@ -162,15 +162,15 @@ Exactly the four defect types that were predicted from the frame design.
 ### Observations
 - F15 (a=b=c=1e200) reaches the isNaN branch that the combinatorial model missed.
 - CORRECTION: frames F04/F05 (discriminant exactly 0) did NOT kill the "<" vs
-  "<=" mutant at line 23. Cause is a flaw in my test code: the D5 exemption
-  (|discriminant| < 1e-6) also matches a discriminant of exactly 0, so the
+  "<=" mutant at line 23. Cause was a flaw in my test code: the D5 exemption
+  (|discriminant| < 1e-6) also matched a discriminant of exactly 0, so the
   mutant's wrong output was recorded as a known defect instead of failing.
-  Fix planned in the improvement round (exempt only discriminant != 0).
-- Survivors at lines 25 and 26: all complex-root frames use a = 1 or a = -1,
-  where 2*a equals 2/a, so the mutants on "2*a" cannot be detected. A complex
-  frame with |a| != 1 is needed (planned: F18 = a=2, b=4, c=10).
-- The remaining uncovered lines are in main and validateInput; they need direct
-  calls and stdin-driven tests.
+  Fixed in Run 6 (exemption now requires discriminant != 0).
+- Survivors at lines 25 and 26: all complex-root frames used a = 1 or a = -1,
+  where 2*a equals 2/a, so the mutants on "2*a" could not be detected.
+  Frame F18 (a=2, b=4, c=10) added in Run 6.
+- The remaining uncovered lines were in main and validateInput; they needed
+  direct calls and stdin-driven tests (Run 6).
 
 
 ## Run 4: Quadratic, metamorphic testing
@@ -205,7 +205,7 @@ D5: 208 entries. No other defect type was found.
 - Similar mutation score to category-partition at 40x the PIT test executions.
 
 
-## Run 5: Quadratic, all three techniques combined
+## Run 5: Quadratic, all three techniques combined (before improvement)
 Date: 2026-10-13
 Command: -Dtest=CombinatorialTest,CategoryPartitionTest,MetamorphicTest
 Tests: 1123 (17 + 242 + 864), 0 failures. Class times 0.151 s, 0.172 s, 0.331 s.
@@ -246,18 +246,93 @@ PIT analysis 24 s (27.4 s total), 5340 test executions (56.21 per mutation).
   tests it runs.
 
 
-## Planned: Run 6, improvement round (quadratic)
-1. CategoryPartitionTest: exempt from D5 only when discriminant != 0 (kills line 23).
-2. Add frame F18 (a=2, b=4, c=10, complex roots -1 +- 2i) to kill lines 25 and 26.
-3. ImprovementTest: direct validateInput tests and scripted-stdin main() tests
-   to cover the 36 missed lines in main and validateInput.
-Record before/after JaCoCo and PIT numbers for the report.
+## Run 6: Quadratic, improvement round (final suite)
+Date: 2026-10-13
+Changes made after reading the Run 5 reports:
+1. CategoryPartitionTest: D5 exemption now requires discriminant != 0
+   (fixes the flaw that hid the line-23 mutant).
+2. Frame F18 added (a=2, b=4, c=10, complex roots -1 +- 2i), for the 2*a
+   mutants on lines 25 and 26. Hand-derived expected roots were correct.
+3. New class ImprovementTest (12 tests): direct validateInput tests and
+   scripted-stdin tests of main().
+
+### Test runs
+- CategoryPartitionTest: 18 tests, 0 failures, 0.137 s (mvn total 3.262 s).
+- ImprovementTest normal mode: 12 tests, 0 failures, 0.103 s (mvn total 3.252 s).
+- ImprovementTest strict mode: 4 failures (one per test method that records a
+  known defect; JUnit stops at the first record in each method).
+- Final suite (four classes): 1136 tests (18 + 242 + 864 + 12), 0 failures.
+  Class times: CategoryPartition 0.188 s, Combinatorial 0.183 s,
+  Improvement 0.008 s, Metamorphic 0.306 s. mvn clean test total 3.975 s.
+  (Earlier text planned 13 ImprovementTest tests: that was a miscount; the
+  class has 12 test methods.)
+
+### Before / after (Quadratic, all techniques combined)
+| Metric             | Before (Run 5)  | After (Run 6)    |
+|--------------------|-----------------|------------------|
+| Tests              | 1123            | 1136             |
+| JaCoCo instruction | 63%             | 99% (3/319 missed) |
+| JaCoCo branch      | 70%             | 100% (0/34 missed) |
+| JaCoCo line        | 53% (39/73)     | 99% (72/73)      |
+| PIT killed         | 40/60 (67%)     | 58/60 (97%)      |
+| PIT survivors      | 3 (23, 66, 71)  | 2 (66, 71)       |
+| PIT no coverage    | 17              | 0                |
+| Test strength      | 93%             | 97% (58/60)      |
+JaCoCo: all methods 100% (solveQuadratic, main, validateInput, sqrtByNewton,
+formatDouble, sign). The only uncovered line is the default constructor
+Quadratic().
+PIT: analysis 34 s (35 s total), 3677 test executions (38.71 per mutation,
+whole project; 35 dates mutants are uncovered and counted in the project row).
+Project row: 58/95 killed (61%), line coverage 72/168 (43%); the quadratic
+row alone is 58/60 (97%), line 72/73 (99%).
+
+### New defects (results/findings_improvement_run6.txt)
+D1: main reports precision failure for (1, 2, 0), whose roots are 0 and -2
+D6: validateInput rejects valid e-notation '1e154' as too large or small
+D6: validateInput rejects valid number '+5'
+D6: validateInput rejects valid number '0.10'
+D7: validateInput accepts 'Infinity'
+D7: validateInput accepts 'NaN' and returns NaN
+D6 = valid numeric input rejected; D7 = non-finite input accepted.
+D1 now also confirmed through the user-facing main().
+
+### Observations
+- Line 23 is now killed: removing the D5 exemption for discriminant 0 let the
+  double-root frames F04/F05 detect the boundary mutant.
+- Lines 25 and 26 are killed by F18 (a = 2) in the category-partition suite
+  alone.
+- The 17 no-coverage mutants (main, validateInput, formatting) are all covered
+  and killed by ImprovementTest.
+- The two remaining survivors, line 66 (math, starting guess of the Newton
+  iteration) and line 71 (boundary, "<" vs "<=" in the stopping test), are
+  probably equivalent mutants: the first only changes the starting value and
+  Newton's method converges to the same value within the tolerance, the
+  second needs the step to equal 1e-8 exactly. Not proven formally.
+- Branch coverage reached 100% only after adding input-handling tests; the
+  numeric-input techniques alone plateaued at 70%.
+- Structural coverage and mutation score reached near-ceiling values while
+  defects D1-D7 remain in the code: tests that cover code do not fix it. The
+  defects were found by the tests' oracles, not by the coverage numbers.
+
+### Quadratic summary (for the report)
+| Suite                    | Tests | Branch | Mutation | Survivors | No cov. |
+|--------------------------|-------|--------|----------|-----------|---------|
+| Baseline                 | 1     | 23%    | 37%      | 9         | 29      |
+| Combinatorial            | 242   | 61%    | 60%      | 7         | 17      |
+| Category-partition       | 17    | 70%    | 63%      | 5         | 17      |
+| Metamorphic              | 864   | 64%    | 62%      | 6         | 17      |
+| Three techniques         | 1123  | 70%    | 67%      | 3         | 17      |
+| Final (+ improvement)    | 1136  | 100%   | 97%      | 2         | 0       |
+
+### Screenshots
+23 improvement run, 24 strict run, 25 final JaCoCo, 26 final PIT summary.
 
 
 ## Decisions pending
 - [ ] Instructor approval of DateHelper as the date case study.
 - [ ] Scope of DateHelper evaluation (whole class vs conversion-related
       methods only).
+- [ ] Dates: all three techniques and an improvement round still to do.
 
 ## AI assistance used so far (for the disclosure section)
 - Project plan and structure: AI-assisted (Claude).
@@ -268,5 +343,7 @@ Record before/after JaCoCo and PIT numbers for the report.
   (Claude), reviewed by me.
 - MetamorphicTest.java, MR design and seed grid: AI-assisted (Claude),
   reviewed by me.
+- CategoryPartitionTest fix (discriminant != 0), frame F18 and
+  ImprovementTest.java: AI-assisted (Claude), reviewed by me.
 - Interpretation of the reports and defect analysis: AI-assisted, to be
   verified and rewritten by me.

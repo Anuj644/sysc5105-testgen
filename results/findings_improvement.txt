@@ -1,0 +1,6 @@
+D1: main reports precision failure for (1, 2, 0), whose roots are 0 and -2
+D6: validateInput rejects valid e-notation '1e154' as too large or small
+D6: validateInput rejects valid number '+5'
+D6: validateInput rejects valid number '0.10'
+D7: validateInput accepts 'Infinity' and returns Infinity
+D7: validateInput accepts 'NaN' and returns NaN

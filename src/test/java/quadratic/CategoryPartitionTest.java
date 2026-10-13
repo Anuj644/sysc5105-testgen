@@ -74,7 +74,7 @@ class CategoryPartitionTest {
             known("D4", id + " prints '+ -' for negative imaginary part " + inputs + " -> " + flat);
         }
         if (!matches(got, exp, ordered.equals("Y"))) {
-            if (Math.abs(b * b - 4 * a * c) < 1e-6) {
+             if (b * b - 4 * a * c != 0 && Math.abs(b * b - 4 * a * c) < 1e-6) {
                 known("D5", id + " wrong roots, tiny discriminant " + inputs + " -> " + flat);
                 return;
             }
