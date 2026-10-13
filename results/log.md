@@ -131,6 +131,36 @@ Categories: discriminant (positive, zero, negative, equals b^2, NaN), a (positiv
 negative, zero [error]), b (zero, non-zero), c (zero, non-zero), root kind.
 Modes: normal (0 failures, class time 0.411 s) and strict (4 failures = known defects).
 
+
+
+
+## Run 4: Quadratic, metamorphic testing
+Date: 2026-10-13
+Test class: quadratic.MetamorphicTest (seed grid 6x6x6 = 216, c != 0, a != 0)
+Relations: MR1 scale all coefficients (k = 2, 0.5, -1, 4, 1e9, 1e-9),
+MR2 negate b (roots negate), MR3 reverse coefficients (roots invert),
+MR4 (a, kb, k^2 c) (roots scale by k). Root sets compared numerically.
+Tests: 864 (216 seeds x 4 relations). Normal mode: 0 failures, 0.567 s.
+Strict mode: 208 failures (= 216 seeds minus 8 whose discriminant is exactly 0),
+all D5 at k = 1e-9.
+
+### JaCoCo (Quadratic)
+Instruction 61%, branch 64% (22/34 covered), line 48% (35/73).
+
+### PIT (Quadratic only)
+60 mutants: 37 killed (62%), 6 survived, 17 no coverage. Test strength 86% (37/43).
+PIT analysis 9 s, 4581 test executions (48.22 per mutation).
+Survived lines: ___
+
+### Defects found: ___ (from findings_metamorphic_run4.txt)
+
+### Observations
+- Oracle-free: no expected outputs stored; found D5 (silent wrong roots) only.
+- Cannot find D1-D4: seeds avoid c = 0, overflow, large roots; numeric root
+  comparison ignores formatting and root order.
+- Similar mutation score to category-partition at 40x the PIT test executions.
+
+
 ### JaCoCo (Quadratic)
 Instruction 63% (118/319 missed), branch 70% (10/34 missed), line 49% (36/73).
 solveQuadratic 100%/100%, sqrtByNewton 100%/100%, formatDouble 100%, sign 100%,
