@@ -329,10 +329,11 @@ D1 now also confirmed through the user-facing main().
 
 
 ## Decisions pending
-- [ ] Instructor approval of DateHelper as the date case study.
-- [ ] Scope of DateHelper evaluation (whole class vs conversion-related
-      methods only).
-- [ ] Dates: all three techniques and an improvement round still to do.
+- [x] DateHelper approved as case study (provided on the course page).
+- [x] Instructor confirmed: removing Android-only methods is OK; coverage and mutation
+      score may be measured on the conversion-related methods only.
+Scope for dates: convert, parseDate, getDesiredFormat (2 overloads), getDateOnly
+(2 overloads), parseAnyDate, DateFormats.getDateFormat.
 
 ## AI assistance used so far (for the disclosure section)
 - Project plan and structure: AI-assisted (Claude).
