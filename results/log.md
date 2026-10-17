@@ -454,15 +454,67 @@ DT3 severity varies: only '23-12-25' yields a wrong date; the other three give
 the right date but skip validation.
 
 ### Dates summary (scoped to the conversion methods)
-| Suite              | Tests | Line (JaCoCo) | Branch | Mutation (PIT) | Strength | Distinct failing inputs | Defect types   |
-|--------------------|-------|---------------|--------|----------------|----------|-------------------------|----------------|
-| Baseline           | 1     | 27% (7/26)    | 0/2    | 36% (4/11)     | 100%     | 0                       | none           |
-| Combinatorial      | 344   | 38% (10/26)   | 0/2    | 36% (4/11)     | 80%      | 252                     | DT1, DT2       |
-| Category-partition | 29    | 38% (10/26)   | 0/2    | 36% (4/11)     | 80%      | 17                      | DT1-DT4        |
+| Suite              | Tests | Line (JaCoCo) | Branch | Mutation (PIT) | Strength | Defect types   |
+|--------------------|-------|---------------|--------|----------------|----------|----------------|
+| Baseline           | 1     | 27% (7/26)    | 0/2    | 36% (4/11)     | 100%     | none           |
+| Combinatorial      | 344   | 38% (10/26)   | 0/2    | 36% (4/11)     | 80%      | DT1, DT2       |
+| Category-partition | 29    | 38% (10/26)   | 0/2    | 36% (4/11)     | 80%      | DT1-DT4        |
+| Metamorphic        | 856   | 50% (13/26)   | 0/2    | 55% (6/11)     | 86%      | DT5, DT7       |
 
 ### Screenshots
 results/screenshots/ (27-31 dates baseline and combinatorial, 32-35 dates
 category-partition).
+
+
+## Run 10: Dates, metamorphic testing
+Date: 2026-10-16
+Test class: dates.DatesMetamorphicTest. Seeds: 284 valid dates (years 1900, 1970,
+2000, 2023, 2024, 2100; every month; days 1, 15, 28 and the last day of the
+month). No expected outputs stored; each test checks a relation:
+MR1 round trip (convert, getDateOnly(String), format back to YYYY-MM-DD);
+MR2 day shift (+1, +7, +31, +365 days: outputs differ by exactly n days);
+MR3 order preservation; MR5 cross-path consistency (convert vs
+getDateOnly(parseDate(...))); MR4 time zone and locale invariance (7 zones,
+9 locales).
+Tests: 856 (284 x 3 parameterized + 4 single). Normal mode: 0 failures, 0.675 s
+(mvn clean test total 3.759 s). Strict mode: 2 failures (mr4TimeZoneInvalidInput
+-> DT5, mr4LocaleValidDates -> DT7), 0.584 s.
+
+### JaCoCo (scoped)
+Line 13 covered / 13 missed (50% of 26), branch 0 of 2, instruction 60 covered /
+54 missed (53% of 114). Newly reached: getDateOnly(String) and getDateOnly(long).
+
+### PIT (scoped)
+11 mutants: 6 killed (55%), 1 survived (line 202 parseDate printStackTrace),
+4 no coverage (60 getDateOnly catch, 191 and 194 parseAnyDate, 210
+getDesiredFormat), test strength 86% (6/7). Newly killed versus Run 8: lines
+58 and 69 (getDateOnly return values), by MR1 and MR5. PIT analysis 2 s
+(mvn total 5.029 s), 7 test executions.
+
+### Defects (results/findings_dates_meta_run10.txt)
+DT5 (3): unparsable input 'abc' prints 31/12/1969 in America/Toronto,
+  Pacific/Kiritimati and Pacific/Pago_Pago, but 01/01/1970 in UTC (the epoch
+  fallback of parseDate formatted in the default time zone).
+DT6 (0): no valid date changes with the time zone.
+DT7 (4): default locale changes the output of valid dates:
+  ar-EG (1900-01-01): Arabic-Indic digits instead of ASCII digits;
+  th-TH-u-nu-thai (1900-01-01): Thai digits;
+  ja-JP-u-ca-japanese (2000-02-29) -> 01/03/2000 (wrong date);
+  th-TH (2000-02-29) -> 01/03/2000 (wrong date).
+  Only the first mismatching date per locale is recorded.
+  Explanation (not verified): the Japanese and Thai Buddhist locales use a
+  different calendar, so "yyyy" 2000 is not 2000 CE and is not a leap year.
+
+### Observations
+- MR1, MR2, MR3 and MR5 found no violation: valid dates convert correctly in
+  the default environment. All defects found are environmental.
+- Metamorphic testing found DT5 and DT7, which the other two techniques cannot
+  see because they run in one fixed zone and locale; it cannot see DT1-DT4
+  because its seeds are valid dates.
+- Every technique finds a different set of defects (comb: DT1-2, cat-part:
+  DT1-4, metamorphic: DT5, DT7).
+- Coverage rose from 10 to 13 lines with 856 tests versus 344 because the
+  relations call getDateOnly, which convert never calls.
 
 
 ## Remaining work

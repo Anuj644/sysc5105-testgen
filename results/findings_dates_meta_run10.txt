@@ -1,0 +1,7 @@
+DT5: unparsable input 'abc' gives 31/12/1969 in America/Toronto but 01/01/1970 in UTC
+DT5: unparsable input 'abc' gives 31/12/1969 in Pacific/Kiritimati but 01/01/1970 in UTC
+DT5: unparsable input 'abc' gives 31/12/1969 in Pacific/Pago_Pago but 01/01/1970 in UTC
+DT7: default locale ar-EG changes the output for valid date 1900-01-01: ٠١/٠١/١٩٠٠
+DT7: default locale ja-JP-u-ca-japanese changes the output for valid date 2000-02-29: 01/03/2000
+DT7: default locale th-TH changes the output for valid date 2000-02-29: 01/03/2000
+DT7: default locale th-TH-u-nu-thai changes the output for valid date 1900-01-01: ๐๑/๐๑/๑๙๐๐
