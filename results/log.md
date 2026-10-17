@@ -45,10 +45,11 @@ DateHelper:
 - Many methods are outside the conversion case study: getToday, getTomorrow,
   getTodayWithTime, getDesiredFormat(formats) (clock-dependent), the
   getDays/Hours/MinutesBetween methods, and getDateAndTime(String), which
-  always throws. Scope decision pending (see below).
-- Known suspected bugs to verify: lenient SimpleDateFormat parsing (2023-02-30
-  becomes March 2), parseDate returns 0 on failure, parseAnyDate never breaks
-  out of its loop, getDateAndTime(String) passes a String to format().
+  always throws. Scope decided by the instructor: see Decisions.
+- Suspected bugs, verified in Runs 8-9: lenient SimpleDateFormat parsing
+  (2023-02-29 becomes 01/03/2023) and parseDate returning 0 on failure.
+  Not yet tested: parseAnyDate never breaks out of its loop,
+  getDateAndTime(String) passes a String to format().
 
 General:
 - JaCoCo and PIT count lines differently (e.g. DateHelper 6/71 vs 30/95
@@ -328,12 +329,160 @@ D1 now also confirmed through the user-facing main().
 23 improvement run, 24 strict run, 25 final JaCoCo, 26 final PIT summary.
 
 
-## Decisions pending
+## Run 7: Dates, scoped baseline (smoke test only)
+Date: 2026-10-16
+Scope, confirmed by the instructor: convert, parseDate, getDesiredFormat (2
+overloads), getDateOnly (2 overloads), parseAnyDate, DateFormats.getDateFormat.
+Removing the Android-only methods was also confirmed acceptable. (Removed:
+prettifyDate x2, datePickerDialog, timePickerDialog.)
+PIT exclusion: -DexcludedMethods=getToday,getTomorrow,getTodayWithTime,
+getDaysBetweenTwoDate,getHoursBetweenTwoDate,getMinutesBetweenTwoDates,
+getDateAndTime,getTimeOnly,getDateFromDays
+Tests: dates.SmokeTest (1), 0.050 s. mvn clean test total 3.944 s.
+JaCoCo (scoped; per-method counters summed from jacoco.xml): line 7 covered /
+19 missed (27% of 26), branch 0 of 2, instruction 35 covered / 79 missed (31% of 114).
+PIT (scoped): 11 mutants (71 in the project minus the 60 in Quadratic), 4 killed
+(36%), 0 survived, 7 no coverage, test strength 100% (4/4).
+Killed: lines 48, 200, 215, 230. No coverage: 58, 60, 69 (getDateOnly), 191, 194
+(parseAnyDate), 202 (catch block of parseDate), 210 (getDesiredFormat).
+Note: PIT console figures such as "4 of 71 killed" and "line coverage 30/168"
+cover the whole project (Quadratic + dates). Quote the scoped figures.
+
+
+## Run 8: Dates, combinatorial testing (PICT, seed 42)
+Date: 2026-10-16
+Test class: dates.DatesCombinatorialTest. Model testdata/dates.pict:
+Year 1900, 1970, 2000, 2023, 2024, 2100, 9999; Month 01, 02, 04, 12, 00, 13;
+Day 01, 28, 29, 30, 31, 00, 32; Sep -, /.
+Suites: exhaustive 588 | pairwise 50 | 3-way 294 -> 344 executions.
+The 3-way suite equals Year x Month x Day (7x6x7): every triple once.
+Oracle: java.time.LocalDate, strict ISO. Valid dates must convert exactly;
+invalid ones must be rejected. DateHelper has no rejection mechanism, so the
+outputs are recorded as defects in results/findings_dates_comb.txt (normal mode
+green; -Dstrict=true fails on them).
+Normal mode: 344 tests, 0 failures, 0.502 s and 0.531 s in two runs (mvn clean
+test total 3.430 s and 3.540 s).
+Strict mode: 272 of 344 tests fail (first: DT2 for '1900/02/31' -> 31/12/1969).
+
+### JaCoCo (scoped)
+Line 10 covered / 16 missed (38% of 26), branch 0 of 2, instruction 40 covered /
+74 missed (35% of 114). The 3 extra lines versus the baseline are the catch
+block of parseDate, reached by invalid inputs.
+
+### PIT (scoped)
+11 mutants: 4 killed (36%), 1 survived, 6 no coverage, test strength 80% (4/5).
+Survived: line 202 parseDate (VoidMethodCall: removed e.printStackTrace()).
+No coverage: lines 58, 60, 69 (getDateOnly), 191, 194 (parseAnyDate),
+210 (getDesiredFormat). PIT analysis 2 s (mvn total 4.910 s), 198 test
+executions (2.79 per mutation). Same 4 mutants killed as with the smoke test.
+
+### Defects (results/findings_dates_comb_run7.txt)
+DT1: invalid calendar date silently converted to a different date (lenient
+     SimpleDateFormat), e.g. month 13, day 32, Feb 29 in a non-leap year.
+DT2: unparsable input silently converted to the epoch date: parseDate returns
+     0. Prints 31/12/1969 in America/Toronto (UTC-5), 01/01/1970 on a UTC
+     machine. By the design of the model this covers the '/' separator inputs.
+Distinct failing inputs: DT1 93, DT2 159 (252 in total). Strict mode reports 272
+failing tests; the difference is inputs that occur in both suites.
+Examples: '1900-00-00' converts to 30/11/1899 (the year changes);
+'1900-02-29' converts to 01/03/1900; '1900-04-00' converts to 31/03/1900.
+
+### Observations
+- No valid date was converted incorrectly (leap days, century years, 9999 all
+  correct); every defect is about invalid input being accepted silently.
+- Mutation score did not change versus the smoke test (4 of 11), although 272
+  of 344 tests exposed defects: coverage-based measures cannot see what the
+  oracle detects.
+- The 6 uncovered mutants are in getDateOnly, parseAnyDate and
+  getDesiredFormat(formats); convert never calls them, so only direct tests
+  can reach them.
+- The survivor at line 202 removes e.printStackTrace(). It is observable by
+  capturing System.err; the test classes silence System.err, which is why it
+  survives. Killable in the improvement round. (An earlier note calling it
+  unobservable was wrong.)
+- Pairwise (50) reached both defect types, like the 3-way suite (294).
+- Classifier limitation: DT2 is assigned when the output equals the epoch
+  string, so an input such as 1970-00-31 (rolls over to 31/12/1969) is counted
+  as DT2 instead of DT1; effect at most a few inputs.
+
+
+## Run 9: Dates, category-partition testing
+Date: 2026-10-16
+Test class: dates.DatesCategoryPartitionTest, frames in testdata/dates_cp_frames.csv
+Frames: 28 (F01-F28: 12 valid, 16 invalid) plus a null-input test = 29 tests.
+Categories: leap vs non-leap February (F02/F03 vs F13-F15), month length
+(F09-F11, F17), year and month boundaries (F05-F08, F12), invalid month and day
+parts (F18-F21), malformed shape (F22-F28).
+Oracle: valid frames have hand-derived output; the test also checks each frame
+against a strict java.time reference (so a wrong hand-derived value fails
+loudly). INVALID frames record what DateHelper does as defects in
+results/findings_dates_catpart.txt (normal mode green; -Dstrict=true fails).
+Normal mode: 29 tests, 0 failures, 0.215 s (mvn clean test total 3.508 s).
+Strict mode: 17 failures (16 invalid frames + null test), 0.198 s.
+
+### JaCoCo (scoped)
+Line 10 covered / 16 missed (38% of 26), branch 0 of 2, instruction 40 / 74
+missed (35%). Identical to the combinatorial suite.
+
+### PIT (scoped)
+11 mutants: 4 killed (36%), 1 survived (line 202), 6 no coverage (58, 60, 69,
+191, 194, 210), test strength 80% (4/5). PIT analysis under 1 s (mvn total
+3.320 s), 16 test executions (0.23 per mutation, whole project).
+
+### Defects (results/findings_dates_catpart_run9.txt)
+DT1 (9): impossible but well-formed date silently converted:
+  2023-02-29 -> 01/03/2023, 1900-02-29 -> 01/03/1900, 2100-02-29 -> 01/03/2100,
+  2023-02-30 -> 02/03/2023, 2023-04-31 -> 01/05/2023, 2023-13-01 -> 01/01/2024,
+  2023-00-10 -> 10/12/2022, 2023-01-00 -> 31/12/2022, 2023-01-32 -> 01/02/2023.
+DT2 (3): unparsable input silently becomes the epoch date (31/12/1969 in
+  America/Toronto): '2023/12/25', '' (empty), 'abc'.
+DT3 (4): malformed input accepted and converted (lenient parsing):
+  '2023-1-5' -> 05/01/2023, '2023-12-25abc' -> 25/12/2023,
+  '23-12-25' -> 25/12/0023 (year 23 taken literally; a wrong date),
+  '2023-12-25T10:00' -> 25/12/2023.
+DT4 (1): convert(null) throws NullPointerException.
+Counts match the prediction made from the frame design (9, 3, 4, 1).
+
+### Comparison with Run 8
+Same line coverage, mutation score and test strength as the 344-test PICT
+suite, with 29 tests (8%) and about 40% of the class time. It also finds two
+defect types that the PICT suite cannot reach, because its model only contains
+well-shaped strings with a '-' or '/' separator: DT3 and DT4.
+All 12 valid frames passed and every hand-derived value equals the reference:
+no valid date is converted incorrectly.
+DT3 severity varies: only '23-12-25' yields a wrong date; the other three give
+the right date but skip validation.
+
+### Dates summary (scoped to the conversion methods)
+| Suite              | Tests | Line (JaCoCo) | Branch | Mutation (PIT) | Strength | Distinct failing inputs | Defect types   |
+|--------------------|-------|---------------|--------|----------------|----------|-------------------------|----------------|
+| Baseline           | 1     | 27% (7/26)    | 0/2    | 36% (4/11)     | 100%     | 0                       | none           |
+| Combinatorial      | 344   | 38% (10/26)   | 0/2    | 36% (4/11)     | 80%      | 252                     | DT1, DT2       |
+| Category-partition | 29    | 38% (10/26)   | 0/2    | 36% (4/11)     | 80%      | 17                      | DT1-DT4        |
+
+### Screenshots
+results/screenshots/ (27-31 dates baseline and combinatorial, 32-35 dates
+category-partition).
+
+
+## Remaining work
+- Dates metamorphic testing (round trip, day-increment consistency, order
+  preservation, separator invariance).
+- Dates improvement round: direct tests for getDateOnly (2 overloads),
+  parseAnyDate and getDesiredFormat(formats), and a test that captures
+  System.err to kill the printStackTrace mutant at line 202.
+- Cross-program comparison table and gaps discussion.
+- IEEE report (6 pages) with the AI disclosure, README, video (10 min max).
+
+
+## Decisions
 - [x] DateHelper approved as case study (provided on the course page).
 - [x] Instructor confirmed: removing Android-only methods is OK; coverage and mutation
       score may be measured on the conversion-related methods only.
 Scope for dates: convert, parseDate, getDesiredFormat (2 overloads), getDateOnly
 (2 overloads), parseAnyDate, DateFormats.getDateFormat.
+- [ ] Not yet answered: does the 6-page limit include the AI disclosure and
+      references?
 
 ## AI assistance used so far (for the disclosure section)
 - Project plan and structure: AI-assisted (Claude).
@@ -346,5 +495,9 @@ Scope for dates: convert, parseDate, getDesiredFormat (2 overloads), getDateOnly
   reviewed by me.
 - CategoryPartitionTest fix (discriminant != 0), frame F18 and
   ImprovementTest.java: AI-assisted (Claude), reviewed by me.
+- dates.pict, DatesCombinatorialTest.java and the scoped measurement scripts
+  (JaCoCo per-method sums, PIT CSV reader): AI-assisted (Claude), reviewed by me.
+- dates_cp_frames.csv and DatesCategoryPartitionTest.java: AI-assisted
+  (Claude), reviewed by me.
 - Interpretation of the reports and defect analysis: AI-assisted, to be
   verified and rewritten by me.

@@ -1,0 +1,17 @@
+DT1: F13 impossible date '2023-02-29' silently converted to 01/03/2023
+DT1: F14 impossible date '1900-02-29' silently converted to 01/03/1900
+DT1: F15 impossible date '2100-02-29' silently converted to 01/03/2100
+DT1: F16 impossible date '2023-02-30' silently converted to 02/03/2023
+DT1: F17 impossible date '2023-04-31' silently converted to 01/05/2023
+DT1: F18 impossible date '2023-13-01' silently converted to 01/01/2024
+DT1: F19 impossible date '2023-00-10' silently converted to 10/12/2022
+DT1: F20 impossible date '2023-01-00' silently converted to 31/12/2022
+DT1: F21 impossible date '2023-01-32' silently converted to 01/02/2023
+DT2: F22 unparsable input '2023/12/25' silently becomes the epoch date 31/12/1969
+DT2: F23 unparsable input '' silently becomes the epoch date 31/12/1969
+DT2: F24 unparsable input 'abc' silently becomes the epoch date 31/12/1969
+DT3: F25 malformed input '2023-1-5' accepted and converted to 05/01/2023
+DT3: F26 malformed input '2023-12-25abc' accepted and converted to 25/12/2023
+DT3: F27 malformed input '23-12-25' accepted and converted to 25/12/0023
+DT3: F28 malformed input '2023-12-25T10:00' accepted and converted to 25/12/2023
+DT4: convert(null) throws NullPointerException

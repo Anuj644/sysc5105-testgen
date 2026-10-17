@@ -1,0 +1,252 @@
+DT1: invalid date '1900-00-00' silently converted to 30/11/1899
+DT1: invalid date '1900-00-28' silently converted to 28/12/1899
+DT1: invalid date '1900-00-32' silently converted to 01/01/1900
+DT1: invalid date '1900-01-32' silently converted to 01/02/1900
+DT1: invalid date '1900-02-29' silently converted to 01/03/1900
+DT1: invalid date '1900-02-30' silently converted to 02/03/1900
+DT1: invalid date '1900-02-31' silently converted to 03/03/1900
+DT1: invalid date '1900-04-00' silently converted to 31/03/1900
+DT1: invalid date '1900-04-31' silently converted to 01/05/1900
+DT1: invalid date '1900-13-01' silently converted to 01/01/1901
+DT1: invalid date '1900-13-28' silently converted to 28/01/1901
+DT1: invalid date '1900-13-32' silently converted to 01/02/1901
+DT1: invalid date '1970-00-00' silently converted to 30/11/1969
+DT1: invalid date '1970-00-01' silently converted to 01/12/1969
+DT1: invalid date '1970-00-30' silently converted to 30/12/1969
+DT1: invalid date '1970-00-32' silently converted to 01/01/1970
+DT1: invalid date '1970-02-29' silently converted to 01/03/1970
+DT1: invalid date '1970-02-31' silently converted to 03/03/1970
+DT1: invalid date '1970-02-32' silently converted to 04/03/1970
+DT1: invalid date '1970-04-31' silently converted to 01/05/1970
+DT1: invalid date '1970-04-32' silently converted to 02/05/1970
+DT1: invalid date '1970-12-00' silently converted to 30/11/1970
+DT1: invalid date '1970-13-00' silently converted to 31/12/1970
+DT1: invalid date '1970-13-01' silently converted to 01/01/1971
+DT1: invalid date '1970-13-28' silently converted to 28/01/1971
+DT1: invalid date '1970-13-30' silently converted to 30/01/1971
+DT1: invalid date '1970-13-32' silently converted to 01/02/1971
+DT1: invalid date '2000-00-01' silently converted to 01/12/1999
+DT1: invalid date '2000-00-30' silently converted to 30/12/1999
+DT1: invalid date '2000-00-31' silently converted to 31/12/1999
+DT1: invalid date '2000-01-00' silently converted to 31/12/1999
+DT1: invalid date '2000-02-00' silently converted to 31/01/2000
+DT1: invalid date '2000-02-30' silently converted to 01/03/2000
+DT1: invalid date '2000-02-32' silently converted to 03/03/2000
+DT1: invalid date '2000-04-00' silently converted to 31/03/2000
+DT1: invalid date '2000-04-31' silently converted to 01/05/2000
+DT1: invalid date '2000-04-32' silently converted to 02/05/2000
+DT1: invalid date '2000-13-00' silently converted to 31/12/2000
+DT1: invalid date '2000-13-28' silently converted to 28/01/2001
+DT1: invalid date '2000-13-29' silently converted to 29/01/2001
+DT1: invalid date '2000-13-31' silently converted to 31/01/2001
+DT1: invalid date '2023-00-00' silently converted to 30/11/2022
+DT1: invalid date '2023-00-01' silently converted to 01/12/2022
+DT1: invalid date '2023-00-31' silently converted to 31/12/2022
+DT1: invalid date '2023-00-32' silently converted to 01/01/2023
+DT1: invalid date '2023-02-00' silently converted to 31/01/2023
+DT1: invalid date '2023-02-29' silently converted to 01/03/2023
+DT1: invalid date '2023-02-32' silently converted to 04/03/2023
+DT1: invalid date '2023-04-31' silently converted to 01/05/2023
+DT1: invalid date '2023-04-32' silently converted to 02/05/2023
+DT1: invalid date '2023-12-00' silently converted to 30/11/2023
+DT1: invalid date '2023-13-00' silently converted to 31/12/2023
+DT1: invalid date '2023-13-01' silently converted to 01/01/2024
+DT1: invalid date '2023-13-30' silently converted to 30/01/2024
+DT1: invalid date '2023-13-31' silently converted to 31/01/2024
+DT1: invalid date '2024-00-00' silently converted to 30/11/2023
+DT1: invalid date '2024-00-01' silently converted to 01/12/2023
+DT1: invalid date '2024-00-28' silently converted to 28/12/2023
+DT1: invalid date '2024-00-29' silently converted to 29/12/2023
+DT1: invalid date '2024-01-00' silently converted to 31/12/2023
+DT1: invalid date '2024-01-32' silently converted to 01/02/2024
+DT1: invalid date '2024-02-30' silently converted to 01/03/2024
+DT1: invalid date '2024-02-31' silently converted to 02/03/2024
+DT1: invalid date '2024-02-32' silently converted to 03/03/2024
+DT1: invalid date '2024-04-00' silently converted to 31/03/2024
+DT1: invalid date '2024-12-32' silently converted to 01/01/2025
+DT1: invalid date '2024-13-01' silently converted to 01/01/2025
+DT1: invalid date '2024-13-30' silently converted to 30/01/2025
+DT1: invalid date '2024-13-31' silently converted to 31/01/2025
+DT1: invalid date '2024-13-32' silently converted to 01/02/2025
+DT1: invalid date '2100-00-29' silently converted to 29/12/2099
+DT1: invalid date '2100-00-30' silently converted to 30/12/2099
+DT1: invalid date '2100-00-31' silently converted to 31/12/2099
+DT1: invalid date '2100-01-32' silently converted to 01/02/2100
+DT1: invalid date '2100-02-00' silently converted to 31/01/2100
+DT1: invalid date '2100-02-31' silently converted to 03/03/2100
+DT1: invalid date '2100-04-00' silently converted to 31/03/2100
+DT1: invalid date '2100-12-32' silently converted to 01/01/2101
+DT1: invalid date '2100-13-00' silently converted to 31/12/2100
+DT1: invalid date '2100-13-01' silently converted to 01/01/2101
+DT1: invalid date '2100-13-30' silently converted to 30/01/2101
+DT1: invalid date '9999-00-00' silently converted to 30/11/9998
+DT1: invalid date '9999-00-01' silently converted to 01/12/9998
+DT1: invalid date '9999-00-29' silently converted to 29/12/9998
+DT1: invalid date '9999-02-32' silently converted to 04/03/9999
+DT1: invalid date '9999-04-00' silently converted to 31/03/9999
+DT1: invalid date '9999-04-31' silently converted to 01/05/9999
+DT1: invalid date '9999-12-00' silently converted to 30/11/9999
+DT1: invalid date '9999-12-32' silently converted to 01/01/10000
+DT1: invalid date '9999-13-00' silently converted to 31/12/9999
+DT1: invalid date '9999-13-01' silently converted to 01/01/10000
+DT1: invalid date '9999-13-29' silently converted to 29/01/10000
+DT1: invalid date '9999-13-31' silently converted to 31/01/10000
+DT2: unparsable input '1900/00/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/00/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/00/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/00/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/00/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/01/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/01/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/01/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/01/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/01/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/01/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/02/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/02/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/02/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/04/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/04/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/12/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/12/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/12/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/12/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/12/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/12/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/13/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/13/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/13/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/13/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1900/13/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970-00-31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970-01-00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/00/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/00/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/01/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/01/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/01/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/02/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/02/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/02/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/04/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/04/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/04/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/04/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/12/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/12/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/13/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '1970/13/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/00/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/00/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/00/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/00/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/01/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/01/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/01/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/01/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/01/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/02/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/02/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/02/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/02/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/04/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/04/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/12/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/12/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/12/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/12/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/12/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/13/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/13/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/13/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2000/13/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/00/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/00/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/00/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/00/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/01/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/01/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/01/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/01/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/01/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/02/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/02/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/02/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/04/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/04/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/04/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/04/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/12/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/12/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/12/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/13/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/13/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/13/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2023/13/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/00/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/00/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/00/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/01/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/01/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/02/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/02/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/04/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/04/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/04/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/12/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/12/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/12/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/12/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/13/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/13/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2024/13/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/00/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/00/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/00/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/00/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/00/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/01/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/01/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/02/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/02/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/02/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/02/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/04/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/04/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/04/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/04/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/12/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/12/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/12/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/13/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/13/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/13/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/13/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '2100/13/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/00/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/00/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/00/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/00/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/01/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/01/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/01/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/01/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/01/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/01/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/02/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/02/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/02/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/02/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/02/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/02/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/04/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/04/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/04/32' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/12/00' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/12/01' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/12/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/12/31' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/13/28' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/13/29' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/13/30' silently becomes the epoch date 31/12/1969
+DT2: unparsable input '9999/13/32' silently becomes the epoch date 31/12/1969
