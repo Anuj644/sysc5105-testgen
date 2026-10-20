@@ -517,14 +517,72 @@ DT7 (4): default locale changes the output of valid dates:
   relations call getDateOnly, which convert never calls.
 
 
+
+  ## Run 11: Dates, improvement round (final suite)
+Date: 2026-10-20
+Targets (from Run 10): 4 uncovered mutants (lines 60, 191, 194, 210), 1 survivor
+(line 202), 0 of 2 branches, 13 of 26 lines.
+New class dates.DatesImprovementTest (7 tests): direct tests of getDateOnly (both
+overloads), parseDate, parseAnyDate and getDesiredFormat(formats), plus capture
+of System.err to observe the printed stack traces (the other test classes
+silence System.err, which is why line 202 survived).
+Normal mode: 7 tests, 0 failures, 0.465 s (mvn total 12.086 s).
+Strict mode: 2 failures (parseAnyDateIsoString -> DT8, parseAnyDateSlashString
+-> DT9), 0.403 s.
+
+### Before / after (dates, scoped, all techniques combined)
+| Metric             | Before (3 techniques, 1229 tests) | After (+ improvement, 1236 tests) |
+|--------------------|-----------------------------------|-----------------------------------|
+| JaCoCo line        | 13/26 (50%)                       | 26/26 (100%)                      |
+| JaCoCo branch      | 0/2                               | 2/2 (100%)                        |
+| JaCoCo instruction | 60/114 (53%)                      | 114/114 (100%)                    |
+| PIT killed         | 6/11 (55%)                        | 11/11 (100%)                      |
+| PIT survivors      | 1 (line 202)                      | 0                                 |
+| PIT no coverage    | 4 (60, 191, 194, 210)             | 0                                 |
+| Test strength      | 86% (6/7)                         | 100%                              |
+Class times, before run: CategoryPartition 0.504 s, Combinatorial 1.204 s,
+Metamorphic 1.176 s (mvn total 11.685 s). After run: CategoryPartition 0.528 s,
+Combinatorial 1.084 s, Improvement 0.094 s, Metamorphic 1.019 s (mvn total
+11.289 s). PIT (after): analysis 9 s, 180 test executions (2.54 per mutation),
+whole-project console line "11 of 71 killed" because the 60 quadratic mutants
+were not run in this session.
+Timing note: this session ran about 2x slower than the 2026-10-16 session
+(e.g. DatesCombinatorialTest 1.2 s versus 0.5 s), so class times must not be
+compared across sessions. A single-session timing run is planned.
+
+### New defects (results/findings_dates_improvement_run11.txt)
+DT8: parseAnyDate('2023-12-25') returns the date 0031-06-15. The loop never
+     breaks, so the LAST matching format wins: dd-MM-yyyy reads the string as
+     day 2023, month 12, year 25. Input dependent: '25/12/2023' came back
+     correct (last matching format is dd/MM/yyyy; explanation from reading the
+     enum order, not tested).
+DT9: parseAnyDate prints 40 stack traces per call even when it succeeds (the
+     enum has 44 formats; 40 fail and print).
+
+### Observations
+- All five remaining mutants were killed by direct calls to methods that
+  convert() never reaches, and by capturing System.err.
+- As with the quadratic solver, the three technique suites plateaued
+  (13/26 lines) because they drive one entry point; the remaining code needed
+  direct tests.
+- Structural coverage and mutation score are 100% while defects DT1-DT5 and
+  DT7-DT9 remain in the code.
+
+### Dates summary (scoped to the conversion methods)
+| Suite                 | Tests | Line (JaCoCo) | Branch | Mutation (PIT) | Strength | Defect types       |
+|-----------------------|-------|---------------|--------|----------------|----------|--------------------|
+| Baseline              | 1     | 27% (7/26)    | 0/2    | 36% (4/11)     | 100%     | none               |
+| Combinatorial         | 344   | 38% (10/26)   | 0/2    | 36% (4/11)     | 80%      | DT1, DT2           |
+| Category-partition    | 29    | 38% (10/26)   | 0/2    | 36% (4/11)     | 80%      | DT1-DT4            |
+| Metamorphic           | 856   | 50% (13/26)   | 0/2    | 55% (6/11)     | 86%      | DT5, DT7           |
+| Three techniques      | 1229  | 50% (13/26)   | 0/2    | 55% (6/11)     | 86%      | DT1-DT5, DT7       |
+| Final (+ improvement) | 1236  | 100% (26/26)  | 2/2    | 100% (11/11)   | 100%     | + DT8, DT9         |
+
+
 ## Remaining work
-- Dates metamorphic testing (round trip, day-increment consistency, order
-  preservation, separator invariance).
-- Dates improvement round: direct tests for getDateOnly (2 overloads),
-  parseAnyDate and getDesiredFormat(formats), and a test that captures
-  System.err to kill the printStackTrace mutant at line 202.
+- Single-session timing run of all eight suites (scripts/timing.ps1).
 - Cross-program comparison table and gaps discussion.
-- IEEE report (6 pages) with the AI disclosure, README, video (10 min max).
+- README, IEEE report (6 pages) with the AI disclosure, video (10 min max).
 
 
 ## Decisions

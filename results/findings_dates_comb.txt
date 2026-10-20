@@ -136,7 +136,6 @@ DT2: unparsable input '1970/12/30' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '1970/12/32' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '1970/13/29' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '1970/13/31' silently becomes the epoch date 31/12/1969
-DT2: unparsable input '2000-00-30' silently becomes the epoch date 
 DT2: unparsable input '2000/00/00' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2000/00/28' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2000/00/29' silently becomes the epoch date 31/12/1969
@@ -184,11 +183,9 @@ DT2: unparsable input '2023/13/28' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2023/13/29' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2023/13/31' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2023/13/32' silently becomes the epoch date 31/12/1969
-DT2: unparsable input '2024-13-31' silently becomes the epoch date 
 DT2: unparsable input '2024/00/30' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2024/00/31' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2024/00/32' silently becomes the epoch date 31/12/1969
-DT2: unparsable input '2024/01/28' silently becomes the epoch date 
 DT2: unparsable input '2024/01/28' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2024/01/29' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2024/02/00' silently becomes the epoch date 31/12/1969
@@ -203,7 +200,6 @@ DT2: unparsable input '2024/12/30' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2024/13/00' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2024/13/28' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2024/13/29' silently becomes the epoch date 31/12/1969
-DT2: unparsable input '2100-13-01' silently becomes the epoch date 
 DT2: unparsable input '2100/00/00' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2100/00/01' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2100/00/28' silently becomes the epoch date 31/12/1969
@@ -227,7 +223,6 @@ DT2: unparsable input '2100/13/28' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2100/13/29' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2100/13/31' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '2100/13/32' silently becomes the epoch date 31/12/1969
-DT2: unparsable input '9999-00-29' silently becomes the epoch date 
 DT2: unparsable input '9999/00/28' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '9999/00/30' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '9999/00/31' silently becomes the epoch date 31/12/1969
@@ -253,6 +248,5 @@ DT2: unparsable input '9999/12/28' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '9999/12/31' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '9999/13/28' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '9999/13/29' silently becomes the epoch date 31/12/1969
-DT2: unparsable input '9999/13/30' silently becomes the epoch date 
 DT2: unparsable input '9999/13/30' silently becomes the epoch date 31/12/1969
 DT2: unparsable input '9999/13/32' silently becomes the epoch date 31/12/1969
