@@ -5,7 +5,7 @@ category-partition, metamorphic) on two Java programs, measured with JaCoCo
 (branch/line coverage), PIT (mutation score) and wall-clock execution time.
 
 Repository: https://github.com/Anuj644/sysc5105-testgen
-Author: [your name], [student number]
+Author: Anuj Dinkar Abhyankar, Student Number - 101405087
 
 ## Programs under test
 
