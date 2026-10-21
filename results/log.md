@@ -579,9 +579,135 @@ DT9: parseAnyDate prints 40 stack traces per call even when it succeeds (the
 | Final (+ improvement) | 1236  | 100% (26/26)  | 2/2    | 100% (11/11)   | 100%     | + DT8, DT9         |
 
 
+
+
+
+
+
+## Run 12: Test execution time, all suites, one session
+Date: 2026-10-20
+Method: scripts/timing.ps1. mvn -q test -Dtest=<class> -Djacoco.skip=true, 5 runs
+per suite after one clean test-compile; time = the "time" attribute of the
+surefire XML (class time; excludes JVM and Maven start-up).
+Machine: Windows 11, 24 logical processors, Java 17.0.20, Maven 3.10.0.
+| Program   | Suite              | Tests | Mean (s) | Runs (s)                                | Per test |
+|-----------|--------------------|-------|----------|-----------------------------------------|----------|
+| Quadratic | Combinatorial      | 242   | 0.695    | 0.713, 0.695, 0.659, 0.681, 0.727       | 2.9 ms   |
+| Quadratic | Category-partition | 18    | 0.241    | 0.288, 0.236, 0.238, 0.226, 0.219       | 13.4 ms  |
+| Quadratic | Metamorphic        | 864   | 1.391    | 1.369, 1.414, 1.381, 1.419, 1.372       | 1.6 ms   |
+| Quadratic | Improvement        | 12    | 0.143    | 0.127, 0.127, 0.153, 0.159, 0.149       | 11.9 ms  |
+| Dates     | Combinatorial      | 344   | 1.182    | 1.205, 1.095, 1.234, 1.167, 1.208       | 3.4 ms   |
+| Dates     | Category-partition | 29    | 0.260    | 0.311, 0.281, 0.295, 0.301, 0.112       | 9.0 ms   |
+| Dates     | Metamorphic        | 856   | 1.694    | 0.873, 1.991, 1.961, 1.804, 1.839       | 2.0 ms   |
+| Dates     | Improvement        | 7     | 0.257    | 0.259, 0.261, 0.265, 0.268, 0.233       | 36.7 ms  |
+Three-technique totals: quadratic 2.327 s, dates 3.136 s.
+Observations:
+- Category-partition is the cheapest suite on both programs (0.24 s and 0.26 s);
+  metamorphic is the slowest (1.39 s and 1.69 s) but cheapest per test.
+- All suites finish in under 2 s; cost matters mainly for mutation analysis:
+  PIT test executions on the quadratic solver were 109 (category-partition),
+  1231 (combinatorial) and 4581 (metamorphic).
+- Two outliers (dates metamorphic run 1: 0.873 s; dates category-partition run 5:
+  0.112 s); means reported together with the run values.
+- Class times recorded in Runs 2-11 come from other sessions and are not
+  comparable with this table (this session was slower). Use Run 12 for any
+  time comparison in the report.
+
+
+
+
+
+
+## Run 13: Quadratic, category-partition alone, re-measured (18 frames, fixed test)
+Date: 2026-10-20
+Reason: the Run 3 numbers were taken before the line-23 fix and frame F18.
+Tests: 18, 0 failures, 0.390 s (mvn clean test total 9.117 s, JaCoCo on).
+JaCoCo (Quadratic): instruction 63% (118/319 missed), branch 70% (10/34 missed),
+line 49% (36/73 covered). Unchanged from Run 3; all missed lines are in main,
+validateInput and the default constructor.
+PIT (Quadratic only): 41/60 killed (68%), 2 survived (line 71 ConditionalsBoundary,
+line 66 Math), 17 no coverage, test strength 95% (41/43). PIT analysis 19 s
+(20 s; mvn total 25.4 s), 93 test executions (0.98 per mutation, whole project).
+Versus Run 3: killed 38 -> 41, survivors 5 -> 2 (lines 23, 25, 26 now killed).
+Matches the prediction made before the run.
+Caveat: category-partition was tuned using its survivor list (the line-23 fix and
+frame F18); combinatorial and metamorphic were not. Report both: 63% untuned,
+68% tuned.
+Replaces the category-partition row in the comparison tables.
+
+
+
+
+
+
+## Final comparison (source for the report tables)
+
+### Table A: Quadratic solver (all 60 mutants, JaCoCo on Quadratic.java)
+| Suite                      | Tests | Branch | Mutation     | Survivors | No cov. | Strength | Class time (s) |
+|----------------------------|-------|--------|--------------|-----------|---------|----------|----------------|
+| Baseline (smoke test)      | 1     | 23%    | 37% (22/60)  | 9         | 29      | 71%      | n/a            |
+| Combinatorial              | 242   | 61%    | 60% (36/60)  | 7         | 17      | 84%      | 0.695          |
+| Category-partition (tuned) | 18    | 70%    | 68% (41/60)  | 2         | 17      | 95%      | 0.241          |
+| Metamorphic                | 864   | 64%    | 62% (37/60)  | 6         | 17      | 86%      | 1.391          |
+| Three techniques (as first written) | 1123 | 70% | 67% (40/60) | 3     | 17      | 93%      | 2.327 (sum)    |
+| Final (+ improvement tests)| 1136  | 100%   | 97% (58/60)  | 2         | 0       | 97%      | 2.470 (sum)    |
+Category-partition before tuning (17 frames): 63% (38/60), 5 survivors, strength 88%.
+Times from Run 12 (one session, JaCoCo off, mean of 5). Sums of class times.
+
+### Table B: Dates (scoped to the conversion methods: 26 lines, 2 branches, 11 mutants)
+| Suite                 | Tests | Line (JaCoCo) | Branch | Mutation     | Strength | Class time (s) |
+|-----------------------|-------|---------------|--------|--------------|----------|----------------|
+| Baseline (smoke test) | 1     | 27% (7/26)    | 0/2    | 36% (4/11)   | 100%     | n/a            |
+| Combinatorial         | 344   | 38% (10/26)   | 0/2    | 36% (4/11)   | 80%      | 1.182          |
+| Category-partition    | 29    | 38% (10/26)   | 0/2    | 36% (4/11)   | 80%      | 0.260          |
+| Metamorphic           | 856   | 50% (13/26)   | 0/2    | 55% (6/11)   | 86%      | 1.694          |
+| Three techniques      | 1229  | 50% (13/26)   | 0/2    | 55% (6/11)   | 86%      | 3.136 (sum)    |
+| Final (+ improvement) | 1236  | 100% (26/26)  | 2/2    | 100% (11/11) | 100%     | 3.393 (sum)    |
+
+### Table C: Which technique found which defect
+| Defect                                              | Combinatorial | Category-part. | Metamorphic | Improvement |
+|-----------------------------------------------------|---------------|----------------|-------------|-------------|
+| D1 abort when c = 0 (roots exist)                   | yes (35)      | yes            | no          | yes (main)  |
+| D2 hang when 4ac overflows                          | predicted, confirmed by hand | no | no       | no          |
+| D3 large roots clamped to int range                 | yes (57)      | yes            | no          | no          |
+| D4 prints "x + -yi"                                 | yes (3)       | yes            | no          | no          |
+| D5 wrong roots, tiny discriminant                   | yes (1)       | yes            | yes (208)   | no          |
+| D6 validateInput rejects valid numbers              | no            | no             | no          | yes         |
+| D7 validateInput accepts NaN / Infinity             | no            | no             | no          | yes         |
+| DT1 impossible date converted to another date       | yes (93)      | yes (9)        | no          | no          |
+| DT2 unparsable input becomes the epoch date         | yes (159)     | yes (3)        | no          | no          |
+| DT3 malformed input accepted                        | no            | yes (4)        | no          | no          |
+| DT4 convert(null) throws NullPointerException       | no            | yes (1)        | no          | no          |
+| DT5 epoch output depends on the time zone           | no            | no             | yes (3)     | no          |
+| DT6 time zone changes a valid date                  | tested        | tested         | not found   | not found   |
+| DT7 locale changes the output of valid dates        | no            | no             | yes (4)     | no          |
+| DT8 parseAnyDate: last matching format wins         | no            | no             | no          | yes         |
+| DT9 parseAnyDate prints 40 stack traces per call    | no            | no             | no          | yes         |
+Counts are distinct failing inputs where the findings file lists them.
+D2 note: the combinatorial test does not execute these inputs (it would hang);
+the hang was confirmed by running the program by hand.
+
+### Points for the discussion
+1. No technique wins everywhere: category-partition has the best score per test
+   and per second; combinatorial found the most quadratic defect types;
+   metamorphic is the only one that found the zone/locale defects and needs no
+   expected outputs.
+2. Every technique found defects the others missed (Table C).
+3. All three plateau on structure (quadratic 70% branch, dates 50% lines) because
+   they drive one entry point; direct and stdin tests were needed for 100%.
+4. 100% coverage and 97-100% mutation score coexist with 7 + 8 known defects.
+5. Cost: metamorphic is the slowest suite (1.4-1.7 s) and needs the most PIT
+   test executions (4581 on the quadratic solver vs 93 for category-partition).
+6. Limits: two quadratic mutants (lines 66, 71) probably equivalent; dates scope
+   narrowed with the instructor's approval; one machine; category-partition tuned
+   after reading survivors while the others were not.
+
+
+
+
 ## Remaining work
-- Single-session timing run of all eight suites (scripts/timing.ps1).
-- Cross-program comparison table and gaps discussion.
+- Single-session timing run of all eight suites (scripts/timing.ps1). (done)
+- Cross-program comparison table and gaps discussion. (done)
 - README, IEEE report (6 pages) with the AI disclosure, video (10 min max).
 
 
