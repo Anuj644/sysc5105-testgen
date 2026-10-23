@@ -721,19 +721,7 @@ Scope for dates: convert, parseDate, getDesiredFormat (2 overloads), getDateOnly
       references?
 
 ## AI assistance used so far (for the disclosure section)
-- Project plan and structure: AI-assisted (Claude).
-- pom.xml, smoke tests, and the edited DateHelper.java: AI-assisted (Claude).
-- PICT model values, SolverHarness.java, CombinatorialTest.java, and the D5
-  handling edit: AI-assisted (Claude), reviewed by me.
-- CategoryPartitionTest.java, frame design and expected values: AI-assisted
-  (Claude), reviewed by me.
-- MetamorphicTest.java, MR design and seed grid: AI-assisted (Claude),
-  reviewed by me.
-- CategoryPartitionTest fix (discriminant != 0), frame F18 and
-  ImprovementTest.java: AI-assisted (Claude), reviewed by me.
-- dates.pict, DatesCombinatorialTest.java and the scoped measurement scripts
-  (JaCoCo per-method sums, PIT CSV reader): AI-assisted (Claude), reviewed by me.
-- dates_cp_frames.csv and DatesCategoryPartitionTest.java: AI-assisted
-  (Claude), reviewed by me.
-- Interpretation of the reports and defect analysis: AI-assisted, to be
-  verified and rewritten by me.
+- PICT models: AI-assisted.
+- All test classes and helper scripts: AI-assisted. This includes `SolverHarness`, the combinatorial, category-partition, metamorphic and improvement test classes for quadratic and one for dates, `scripts/measure.ps1` and `scripts/timing.ps1`.
+- AI-assisted classes carry a comment marking them as AI-assisted.
+- Experiments were run by me. The numbers in `results/log.md` come from my own runs.

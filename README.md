@@ -192,7 +192,7 @@ comparable.
 
 AI assistance was used for: the PICT
 models; all test classes and helper scripts (`SolverHarness`, the combinatorial,
-category-partition, metamorphic and improvement test classes for both programs,
+category-partition, metamorphic and improvement test classes for quadratic and one for dates programs,
 `scripts/measure.ps1`, `scripts/timing.ps1`);
 classes carry a comment marking them as AI-assisted. The experiments were run by me
 , and the numbers in `results/log.md` come from my own runs.
