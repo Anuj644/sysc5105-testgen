@@ -18,7 +18,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 /**
- * AI-assisted (Claude), reviewed by me.
+ * AI-assisted , reviewed by me.
  * Metamorphic tests: no expected output is stored. Each seed is solved, a follow-up equation is
  * built by a metamorphic relation, and the follow-up roots must match the transformed seed roots.
  * Violations in the tiny-discriminant region are recorded as D5 (known cause); any other violation

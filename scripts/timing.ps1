@@ -1,4 +1,4 @@
-# AI-assisted (Claude), reviewed by me. Re-measures the test execution time of every suite in one session.
+# AI-assisted , reviewed by me. Re-measures the test execution time of every suite in one session.
 $suites = "quadratic.CombinatorialTest","quadratic.CategoryPartitionTest","quadratic.MetamorphicTest","quadratic.ImprovementTest",
           "dates.DatesCombinatorialTest","dates.DatesCategoryPartitionTest","dates.DatesMetamorphicTest","dates.DatesImprovementTest"
 $runs = 5

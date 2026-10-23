@@ -16,7 +16,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 /**
- * AI-assisted (Claude), reviewed by me.
+ * AI-assisted , reviewed by me.
  * Runs PICT-generated pairwise and 3-way suites. The oracle is mathematical (root residual,
  * exact discriminant sign), not a stored expected output.
  *

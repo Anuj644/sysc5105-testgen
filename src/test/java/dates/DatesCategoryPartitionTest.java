@@ -23,7 +23,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 /**
- * AI-assisted (Claude), reviewed by me.
+ * AI-assisted , reviewed by me.
  * Category-partition frames from testdata/dates_cp_frames.csv for DateHelper.convert.
  * Valid frames: exact hand-derived output, cross-checked against a strict java.time reference.
  * INVALID frames: the reference must reject them; DateHelper cannot reject, so what it does is

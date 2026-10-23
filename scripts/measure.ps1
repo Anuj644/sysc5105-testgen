@@ -1,4 +1,4 @@
-# AI-assisted (Claude), reviewed by me. Scoped measurement helpers for the dates case study.
+# AI-assisted , reviewed by me. Scoped measurement helpers for the dates case study.
 $global:ex = "getToday,getTomorrow,getTodayWithTime,getDaysBetweenTwoDate,getHoursBetweenTwoDate,getMinutesBetweenTwoDates,getDateAndTime,getTimeOnly,getDateFromDays"
 
 function Get-DatesJacoco {

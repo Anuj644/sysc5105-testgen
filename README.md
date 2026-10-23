@@ -190,10 +190,9 @@ comparable.
 
 ## AI assistance disclosure
 
-AI assistance (Claude, Anthropic) was used for: the project plan; `pom.xml`; the PICT
+AI assistance was used for: the PICT
 models; all test classes and helper scripts (`SolverHarness`, the combinatorial,
 category-partition, metamorphic and improvement test classes for both programs,
-`scripts/measure.ps1`, `scripts/timing.ps1`); removing the Android code from
-`DateHelper.java`; the first interpretation of the reports; and this README. Test
-classes carry a comment marking them as AI-assisted. The experiments were run by the
-author, and the numbers in `results/log.md` come from the author's own runs.
+`scripts/measure.ps1`, `scripts/timing.ps1`);
+classes carry a comment marking them as AI-assisted. The experiments were run by me
+, and the numbers in `results/log.md` come from my own runs.

@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 /**
- * AI-assisted (Claude), reviewed by me.
+ * AI-assisted , reviewed by me.
  * Category-partition frames from testdata/quad_cp_frames.csv. Expected roots are derived by hand.
  * Known defects are recorded in results/findings_catpart.txt (build stays green) and fail the
  * test only with -Dstrict=true.

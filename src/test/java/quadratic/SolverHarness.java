@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/** AI-assisted (Claude), reviewed by me. Shared helpers for all quadratic test suites. */
+/** AI-assisted , reviewed by me. Shared helpers for all quadratic test suites. */
 final class SolverHarness {
 
     private SolverHarness() {}
