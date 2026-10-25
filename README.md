@@ -158,7 +158,7 @@ The two remaining quadratic survivors (lines 66 and 71) are probably equivalent
 mutants. Mean class times, one session, JaCoCo off: category-partition 0.24 s and
 0.26 s, combinatorial 0.70 s and 1.18 s, metamorphic 1.39 s and 1.69 s.
 Full numbers, run by run, are in `results/log.md`.
-results/SYSC_5105_Experiment_Evidence.pdf   all screenshots, with the method for each step
+results/SYSC_5105_Project_Evidence.pdf   all screenshots, with the method for each step
 
 ## Defects found
 
