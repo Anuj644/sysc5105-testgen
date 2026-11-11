@@ -191,9 +191,6 @@ comparable.
 
 ## AI assistance disclosure
 
-AI assistance was used for: the PICT
-models; all test classes and helper scripts (`SolverHarness`, the combinatorial,
-category-partition, metamorphic and improvement test classes for quadratic and one for dates programs,
-`scripts/measure.ps1`, `scripts/timing.ps1`);
-classes carry a comment marking them as AI-assisted. The experiments were run by me
-, and the numbers in `results/log.md` come from my own runs.
+PICT Models & Test Suite Design: AI assistance was used to assist in generating PICT model parameters, helper scripts (SolverHarness, scripts/measure.ps1, scripts/timing.ps1), and initial code templates for test classes (combinatorial, category-partition, metamorphic, and targeted coverage/mutation improvement tests for the quadratic equation and date conversion case studies). All AI-assisted source files contain explicit header comments identifying AI involvement.
+
+I conducted all experimental runs, verified the test generation outputs, manually executed the mutation testing and code coverage tools, collected all metrics, and authored the final report and analysis in results/log.md.
