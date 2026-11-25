@@ -4,6 +4,9 @@ package dates;
 // Modified for SYSC 5105 testing project: Android-dependent code (DateUtils, DatePickerDialog,
 // TimePickerDialog, prettifyDate) removed and convert() added. All other logic is unchanged.
 
+
+/** AI-assisted for convert() method, reviewed by me.. */
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -17,13 +17,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-/**
- * AI-assisted , reviewed by me.
- * Metamorphic tests: no expected output is stored. Each seed is solved, a follow-up equation is
- * built by a metamorphic relation, and the follow-up roots must match the transformed seed roots.
- * Violations in the tiny-discriminant region are recorded as D5 (known cause); any other violation
- * fails the test. Findings go to results/findings_metamorphic.txt; -Dstrict=true fails on them.
- */
+
 class MetamorphicTest {
 
     static final boolean STRICT = Boolean.getBoolean("strict");

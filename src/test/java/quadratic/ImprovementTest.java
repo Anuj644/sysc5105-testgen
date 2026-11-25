@@ -15,12 +15,7 @@ import java.util.TreeSet;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
-/**
- * AI-assisted , reviewed by me.
- * Improvement round: direct calls to validateInput and scripted-stdin runs of main().
- * Known defects are recorded in results/findings_improvement.txt (build stays green) and fail
- * the test only with -Dstrict=true.
- */
+
 class ImprovementTest {
 
     static final boolean STRICT = Boolean.getBoolean("strict");

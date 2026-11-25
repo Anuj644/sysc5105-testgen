@@ -15,14 +15,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-/**
- * AI-assisted , reviewed by me.
- * Runs PICT-generated pairwise and 3-way suites. The oracle is mathematical (root residual,
- * exact discriminant sign), not a stored expected output.
- *
- * Known defects are recorded in results/findings_combinatorial.txt. In the default mode they do
- * not fail the build (so PIT can run); with -Dstrict=true they fail the test.
- */
+
 class CombinatorialTest {
 
     static final boolean STRICT = Boolean.getBoolean("strict");
