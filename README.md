@@ -7,6 +7,10 @@ category-partition, metamorphic) on two Java programs, measured with JaCoCo
 Repository: https://github.com/Anuj644/sysc5105-testgen
 Author: Anuj Dinkar Abhyankar, Student Number - 101405087
 
+Platform: the mvn commands (mvn clean test, PIT, JaCoCo) work on any system with
+Java 17 and Maven 3.10. The two measurement scripts, scripts/measure.ps1 and
+scripts/timing.ps1, are PowerShell scripts and need Windows PowerShell.
+
 ## Programs under test
 
 | Program | Source | Changes made for this project |
@@ -35,11 +39,14 @@ src/test/java/dates/            SmokeTest, DatesCombinatorialTest, DatesCategory
                                 DatesMetamorphicTest, DatesImprovementTest
 testdata/                       PICT models (quadratic.pict, dates.pict), generated suites
                                 (*_pairwise.tsv, *_3way.tsv), category-partition frames (*_cp_frames.csv)
+testdata/README.txt             what each test data file is
+testdata/category_partition_design.md   categories, choices, constraints and frames
 scripts/measure.ps1             scoped JaCoCo and PIT readers for the dates
 scripts/timing.ps1              timing of every suite in one session
 results/log.md                  full experiment log (every run, every number)
 results/findings_*.txt          defects recorded by the tests (one clean copy per run)
-results/screenshots/            screenshots of the runs
+results/README.txt              what each results file is
+results/SYSC_5105_Project_Evidence.pdf   screenshots of the runs, with the method for each step
 ```
 
 ## Requirements
