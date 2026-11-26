@@ -191,6 +191,6 @@ comparable.
 
 ## AI assistance disclosure
 
-AI Use Statement. I used Claude (Anthropic) for the following purposes only: explaining concepts and error messages (Maven, JaCoCo, PIT and PICT); build and tool setup (the pom.xml configuration and PICT command syntax); code needed only to compile the programs (the empty NotEnoughPrecisionException class and the convert() wrapper in DateHelper.java); measurement scripts that contain no test inputs or expected outputs (scripts/measure.ps1 and scripts/timing.ps1); and grammar correction of text I wrote. Files with AI-assisted content carry an “AI-assisted” comment label.
+AI Use Statement. I used AI for the following purposes only: explaining concepts and error messages (Maven, JaCoCo, PIT and PICT); build and tool setup (the pom.xml configuration and PICT command syntax); code needed only to compile the programs (the empty NotEnoughPrecisionException class and the convert() wrapper in DateHelper.java); measurement scripts that contain no test inputs or expected outputs (scripts/measure.ps1 and scripts/timing.ps1); and grammar correction of text I wrote. Files with AI-assisted content carry an “AI-assisted” comment label.
 
 I conducted all experimental runs, verified the test generation outputs, manually executed the mutation testing and code coverage tools, collected all metrics, and authored the final report and analysis in results/log.md.
